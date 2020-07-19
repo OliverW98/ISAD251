@@ -1,0 +1,14 @@
+<?php
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home page</title>
+</head>
+<body>
+<h1>Home page</h1>
+
+
+</body>
+</html>
