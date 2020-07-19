@@ -1,9 +1,9 @@
 <?php
 
-const DB_SERVER = "proj-mysql.uopnet.plymouth.ac.uk";
-const DB_USER = "PRCO204_SyntaxError";
-const DB_PASSWORD = 'nJDXfDXEVBgiFT44';
-const DB_DATABASE = "PRCO204_SyntaxError";
+const DB_SERVER = "socem1.uopnet.plymouth.ac.uk";
+const DB_USER = "OWilkes";
+const DB_PASSWORD = 'ISAD251_22201425';
+const DB_DATABASE = "ISAD251_Owilkes";
 
 
 function getConnection()
@@ -17,4 +17,11 @@ function getConnection()
         echo 'Connection failed: ', $err->getMessage();
     }
     return $dbConnection;
+}
+
+
+function recordAppointment($userId, $appointmentDate, $appointmentDetails, $appointmentNotes, $numOfPatients)
+{
+    $statement = getConnection()->prepare("EXEC RecordAppointment $userId, '".$appointmentDate."' , '".$appointmentDetails."' , '".$appointmentNotes."' ,$numOfPatients;");
+    $statement->execute();
 }
