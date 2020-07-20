@@ -22,6 +22,6 @@ function getConnection()
 
 function recordAppointment($userId, $appointmentDate, $appointmentDetails, $appointmentNotes, $numOfPatients)
 {
-    $statement = getConnection()->prepare("EXEC RecordAppointment $userId, '".$appointmentDate."' , '".$appointmentDetails."' , '".$appointmentNotes."' ,$numOfPatients;");
+    $statement = getConnection()->prepare("EXEC RecordAppointment $userId,'$appointmentDate','$appointmentDetails','$appointmentNotes',$numOfPatients;");
     $statement->execute();
 }

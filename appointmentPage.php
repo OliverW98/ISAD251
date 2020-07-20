@@ -15,11 +15,9 @@ function RecordUserAppointment($datetime, $details, $numOfPatients)
 
 if (isset($_POST['inputButton'])) {
 
-    var_dump("got here!");
     RecordUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
-
     $paraOutputColour= 'green';
-    $paraOutput = "Sleep times Recorded!";
+    $paraOutput = "Appointment created";
 }
 
 ?>
