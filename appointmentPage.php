@@ -15,6 +15,7 @@ function RecordUserAppointment($datetime, $details, $numOfPatients)
 
 if (isset($_POST['inputButton'])) {
 
+    var_dump("button pressed");
     RecordUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
     $paraOutputColour= 'green';
     $paraOutput = "Appointment created";

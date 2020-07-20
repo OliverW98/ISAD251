@@ -7,7 +7,7 @@
     <title>home page</title>
 </head>
 <body>
-<h1>Home page</h1>
+<h1>Home page2</h1>
 
 <div class="row">
     <div class="col-sm-12">
