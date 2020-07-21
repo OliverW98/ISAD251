@@ -20,9 +20,48 @@ function getConnection()
     return $dbConnection;
 }
 
-
-function recordAppointment($userId, $appointmentDate, $appointmentDetails, $appointmentNotes, $numOfPatients)
+function getUser()
 {
-    $statement = getConnection()->prepare("CALL recordAppointment ('".$userId."','".$appointmentDate."','".$appointmentDetails."','".$appointmentNotes."','".$numOfPatients."')");
+    $userID = 1; // only 1 user
+
+    $appointmentData = getAppointments($userID); // fetches all the appointments for the user
+
+    $user = createUserObject($userID, $appointmentData); // creates a user object
+
+    return $user;
+
+}
+
+function createUserObject($userID, $appointmentData)
+{
+
+    $appointmentsArray = array();
+
+    for ($i =0 ; $i< count($appointmentData); $i++)
+    {
+        $appointmentID = $appointmentData[$i]['appointtmentID'];
+        $userID = $appointmentData[$i]['userID'];
+        $appointmentDate = $appointmentData[$i]['appointmentDate'];
+        $appointmentDetails = $appointmentData[$i]['appointmentDetails'];
+        $appointmentNotes = $appointmentData[$i]['appointmentNotes'];
+        $numOfPatients = $appointmentData[$i]['numOfPatients'];
+
+        $appointment = new appointment($appointmentID,$userID,$appointmentDate,$appointmentDetails,$appointmentNotes,$numOfPatients);
+
+        array_push($appointmentsArray, $appointment);
+    }
+
+    return $user = new user($userID, $appointmentData);
+}
+
+
+function getAppointments($userID){
+    $statement = getConnection()->prepare("CALL getAppointments ('".$userID."')");
+    $statement->execute();
+}
+
+function recordAppointment($userID, $appointmentDate, $appointmentDetails, $appointmentNotes, $numOfPatients)
+{
+    $statement = getConnection()->prepare("CALL recordAppointment ('".$userID."','".$appointmentDate."','".$appointmentDetails."','".$appointmentNotes."','".$numOfPatients."')");
     $statement->execute();
 }
