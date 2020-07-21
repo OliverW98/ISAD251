@@ -11,4 +11,21 @@ class user
         $this->userID = $userId;
         $this->appointmentsArray = $appointmentArray;
     }
+
+    /**
+     * @return array
+     */
+    public function getAppointmentsArray()
+    {
+        return $this->appointmentsArray;
+    }
+
+    /**
+     * @param array $appointmentsArray
+     */
+    public function setAppointmentsArray($appointmentsArray)
+    {
+        $this->appointmentsArray = $appointmentsArray;
+    }
+
 }
