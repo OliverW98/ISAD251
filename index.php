@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <input name="appointmentPageBtn" value="Appointments" type="button" onclick="location.href='appointmentPage.php'">
+        <input name="creatAppointmentPageBtn" value="Create Appointment" type="button" onclick="location.href='createAppointmentPage.php'">
     </div>
 </div>
 
