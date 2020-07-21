@@ -9,7 +9,6 @@ const DB_DATABASE = "ISAD251_Owilkes";
 function getConnection()
 {
     $dataSourceName = 'mysql:host='.DB_SERVER.';dbname='.DB_DATABASE;
-    echo $dataSourceName;
     $dbConnection = null;
     try {
         $dbConnection = new PDO($dataSourceName, DB_USER, DB_PASSWORD);
@@ -39,7 +38,7 @@ function createUserObject($userID, $appointmentData)
 
     for ($i =0 ; $i< count($appointmentData); $i++)
     {
-        $appointmentID = $appointmentData[$i]['appointtmentID'];
+        $appointmentID = $appointmentData[$i]['appointmentID'];
         $userID = $appointmentData[$i]['userID'];
         $appointmentDate = $appointmentData[$i]['appointmentDate'];
         $appointmentDetails = $appointmentData[$i]['appointmentDetails'];
@@ -58,6 +57,9 @@ function createUserObject($userID, $appointmentData)
 function getAppointments($userID){
     $statement = getConnection()->prepare("CALL getAppointments ('".$userID."')");
     $statement->execute();
+    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $data;
 }
 
 function recordAppointment($userID, $appointmentDate, $appointmentDetails, $appointmentNotes, $numOfPatients)
