@@ -15,10 +15,19 @@ function RecordUserAppointment($datetime, $details, $numOfPatients)
 
 if (isset($_POST['inputButton'])) {
 
-    var_dump("button pressed");
-    RecordUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
-    $paraOutputColour= 'green';
-    $paraOutput = "Appointment created";
+    $tempNumOfPatients = $_POST['numOfPatientsInput'];
+
+    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])){
+        $paraOutputColour= 'red';
+        $paraOutput = "Make sure to fill all fields.";
+    }elseif ($tempNumOfPatients < 0){
+        $paraOutputColour = 'red';
+        $paraOutput = 'Number of patients must be positive.';
+    }else{
+        RecordUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
+        $paraOutputColour= 'green';
+        $paraOutput = "Appointment created";
+    }
 }
 
 ?>
@@ -45,23 +54,21 @@ if (isset($_POST['inputButton'])) {
             <input type="datetime-local" name="datetimeInput">
         </div>
     </div>
-
+    <br>
     <div class="row">
         <div class="col-sm-12">
             <label for="numOfPatientsInput">Number of Patients : </label>
             <input name="numOfPatientsInput" type="number">
         </div>
     </div>
-
-
+    <br>
     <div class="row">
         <div class="col-sm-12">
             <label for="detailsInput">Details : </label>
             <input name="detailsInput" placeholder="..." type="text">
         </div>
     </div>
-
-
+    <br>
     <div class="row">
         <div class="col-sm-12">
             <input name="inputButton" value="ENTER" type="submit">
