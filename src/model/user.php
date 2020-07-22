@@ -7,7 +7,7 @@ class user
     private $userID;
     private $appointmentsArray = array();
 
-    public function __construct($userId, $appointmentArray){
+    public function __construct($userId, array $appointmentArray){
         $this->userID = $userId;
         $this->appointmentsArray = $appointmentArray;
     }

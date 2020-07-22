@@ -47,10 +47,11 @@ function createUserObject($userID, $appointmentData)
 
         $appointment = new appointment($appointmentID,$userID,$appointmentDate,$appointmentDetails,$appointmentNotes,$numOfPatients);
 
+
         array_push($appointmentsArray, $appointment);
     }
 
-    return $user = new user($userID, $appointmentData);
+    return $user = new user($userID, $appointmentsArray);
 }
 
 
