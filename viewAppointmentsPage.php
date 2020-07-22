@@ -6,15 +6,18 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
-$txtAreaOutput ='';
+$txtAreaOutput = fillTextArea($appointmentsArray);
 
-var_dump($appointmentsArray);
 
-for ($i = 0; $i < count($appointmentsArray); $i++)
-{
-
-    $txtAreaOutput =  $appointmentsArray[$i]->getAppointmentDate();
+function fillTextArea($array){
+    $txt ='';
+    for ($i = 0; $i < count($array); $i++)
+    {
+        $txt .= "You have an appointment for {$array[$i]->getNumOfPatients()} patients on : {$array[$i]->getAppointmentDate()}.\r\n";
+    }
+    return $txt;
 }
+
 
 ?>
 <!DOCTYPE html>
