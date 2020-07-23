@@ -68,3 +68,9 @@ function recordAppointment($userID, $appointmentDate, $appointmentDetails, $appo
     $statement = getConnection()->prepare("CALL recordAppointment ('".$userID."','".$appointmentDate."','".$appointmentDetails."','".$appointmentNotes."','".$numOfPatients."')");
     $statement->execute();
 }
+
+function deleteAppointment($appointmentID)
+{
+    $statement = getConnection()->prepare("CALL deleteAppointment ('".$appointmentID."')");
+    $statement->execute();
+}
