@@ -18,14 +18,25 @@ function fillTextArea($array){
     return $txt;
 }
 
-function findAppointment(){
-    // use the date to find the appointment
+function findAppointment($array,$date){
+    $txt = '';
+    for ($i = 0; $i < count($array); $i++)
+    {
+        if($array[$i]->getAppointmentDate() == $date)
+        {
+            $txt = "Appointment Date    : {$array[$i]->getAppointmentDate()} \r\n";
+            $txt .= "Number of patients  : {$array[$i]->getNumOfPatients()} \r\n";
+            $txt .= "Appointment Details : {$array[$i]->getAppointmentDetails()} \r\n";
+            $txt .= "Appointment Notes   : {$array[$i]->getAppointmentNotes()}";
+        }
+    }
+    return $txt;
 }
 
 if (isset($_POST['btnViewAppointment'])){
 
     $selectedDate = $_POST['selectAppointmentDate'];
-    var_dump($selectedDate);
+    $txtAppDetails = findAppointment($appointmentsArray,$selectedDate);
 }
 
 ?>
@@ -51,7 +62,7 @@ if (isset($_POST['btnViewAppointment'])){
                     <option name="option"><?php echo $item->getAppointmentDate()?></option>
                 <?php } ?>
             </select>
-            <textarea name="txtAppList"  rows="10" cols="75"></textarea>
+            <textarea name="txtAppList"  rows="10" cols="75"><?php echo $txtAppDetails?></textarea>
         </div>
     </div>
     <div class="row">
