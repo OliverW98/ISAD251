@@ -6,8 +6,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
-$txtAreaOutput = fillTextArea($appointmentsArray);
-
+$txtAppList = fillTextArea($appointmentsArray);
+$txtAppDetails ='';
 
 function fillTextArea($array){
     $txt ='';
@@ -18,6 +18,15 @@ function fillTextArea($array){
     return $txt;
 }
 
+function findAppointment(){
+    // use the date to find the appointment
+}
+
+if (isset($_POST['btnViewAppointment'])){
+
+    $selectedDate = $_POST['selectAppointmentDate'];
+    var_dump($selectedDate);
+}
 
 ?>
 <!DOCTYPE html>
@@ -26,19 +35,35 @@ function fillTextArea($array){
     <meta charset="UTF-8">
     <title>View Appointments</title>
 </head>
-
+<style>
+    textarea{
+        resize: none;
+    }
+</style>
 <body>
 <h1>View Appointments</h1>
-
-<div class="row">
-    <div class="col-sm-12">
-        <textarea name="txtAppList"  rows="10" cols="75"><?php echo $txtAreaOutput?></textarea>
+<form method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+    <div class="row">
+        <div class="col-sm-12">
+            <textarea name="txtAppList"  rows="10" cols="75"><?php echo $txtAppList?></textarea>
+            <select name="selectAppointmentDate">
+                <?php foreach ($appointmentsArray as $item){ ?>
+                    <option name="option"><?php echo $item->getAppointmentDate()?></option>
+                <?php } ?>
+            </select>
+            <textarea name="txtAppList"  rows="10" cols="75"></textarea>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input name="btnViewAppointment" value="View Appointment" type="submit">
+        </div>
+    </div>
+</form>
 
 <div class="row">
     <div class="col-sm-12">
-        <input name="backButton" value="Back" type="button" onclick="location.href='index.php'">
+        <input name="btnBack" value="Back" type="button" onclick="location.href='index.php'">
     </div>
 </div>
 

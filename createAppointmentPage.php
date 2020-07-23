@@ -13,14 +13,14 @@ function RecordUserAppointment($datetime, $details, $numOfPatients)
 }
 
 
-if (isset($_POST['inputButton'])) {
+if (isset($_POST['btnInput'])) {
 
     $tempNumOfPatients = $_POST['numOfPatientsInput'];
 
     if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])){
         $paraOutputColour= 'red';
         $paraOutput = "Make sure to fill all fields.";
-    }elseif ($tempNumOfPatients < 0){
+    }elseif ($tempNumOfPatients <= 0){
         $paraOutputColour = 'red';
         $paraOutput = 'Number of patients must be positive.';
     }else{
@@ -71,7 +71,7 @@ if (isset($_POST['inputButton'])) {
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="inputButton" value="ENTER" type="submit">
+                <input name="btnInput" value="ENTER" type="submit">
             </div>
         </div>
 
@@ -88,7 +88,7 @@ if (isset($_POST['inputButton'])) {
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="backButton" value="Back" type="button" onclick="location.href='index.php'">
+                <input name="btnBack" value="Back" type="button" onclick="location.href='index.php'">
             </div>
         </div>
     </div>
