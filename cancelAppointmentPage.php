@@ -5,16 +5,18 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $user = getUser();
-$appointmentsArray = ($user->getAppointmentsArray());
+$appointmentsArray = $user->getAppointmentsArray();
 $paraOutput = '';
 $paraOutputColour= 'black';
 
-function findAppointment($array,$date){
+function findAppointment($array,$date)
+{
     for ($i = 0; $i < count($array); $i++)
     {
         if($array[$i]->getAppointmentDate() == $date)
         {
             return (int)$array[$i]->getAppointmentID();
+
         }
     }
 }
@@ -22,12 +24,10 @@ function findAppointment($array,$date){
 if(isset($_POST['btnCancelAppointment']))
 {
     $selectedDate = $_POST['selectAppointmentDate'];
-    var_dump($selectedDate);
-    var_dump(findAppointment($appointmentsArray,$selectedDate));
     deleteAppointment(findAppointment($appointmentsArray,$selectedDate));
     $paraOutput = 'Appointment Canceled';
     $paraOutputColour= 'green';
-
+    header("Refresh:0"); // refreshes the page
 }
 
 ?>

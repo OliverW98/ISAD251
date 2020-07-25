@@ -24,9 +24,9 @@ function findAppointment($array,$date){
     {
         if($array[$i]->getAppointmentDate() == $date)
         {
-            $txt = "Appointment Date    : {$array[$i]->getAppointmentDate()} \r\n";
-            $txt .= "Number of patients  : {$array[$i]->getNumOfPatients()} \r\n";
-            $txt .= "Appointment Details : {$array[$i]->getAppointmentDetails()} \r\n";
+            $txt = "Appointment Date    : {$array[$i]->getAppointmentDate()} \n";
+            $txt .= "Number of patients  : {$array[$i]->getNumOfPatients()} \n";
+            $txt .= "Appointment Details : {$array[$i]->getAppointmentDetails()} \n";
             $txt .= "Appointment Notes   : {$array[$i]->getAppointmentNotes()}";
         }
     }
