@@ -70,6 +70,11 @@ if (isset($_POST['btnViewAppointment'])){
             <input name="btnViewAppointment" value="View Appointment" type="submit">
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input name="btnEditAppointment" value="Edit Appointment" type="submit">
+        </div>
+    </div>
 </form>
 
 <div class="row">

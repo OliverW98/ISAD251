@@ -7,15 +7,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 $paraOutput = '';
 $paraOutputColour= 'black';
 
-function RecordUserAppointment($datetime, $details, $numOfPatients)
+function editUserAppointment($datetime, $details, $numOfPatients)
 {
-    $UserID = 1;
-    $notes = '';
-    recordAppointment($UserID,$datetime,$details,$notes, $numOfPatients);
+
+    editAppointment($appointmentID,$datetime,$details, $numOfPatients);
 }
 
 
-if (isset($_POST['btnInput'])) {
+if (isset($_POST['btnEdit'])) {
 
     $tempNumOfPatients = $_POST['numOfPatientsInput'];
 
@@ -26,9 +25,9 @@ if (isset($_POST['btnInput'])) {
         $paraOutputColour = 'red';
         $paraOutput = 'Number of patients must be positive.';
     }else{
-        RecordUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
+        editUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
         $paraOutputColour= 'green';
-        $paraOutput = "Appointment created";
+        $paraOutput = "Appointment Edited";
     }
 }
 
@@ -67,13 +66,13 @@ if (isset($_POST['btnInput'])) {
         <div class="row">
             <div class="col-sm-12">
                 <label for="detailsInput">Details : </label>
-                <input name="detailsInput" placeholder="..." type="text">
+                <input name="detailsInput" type="text">
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnInput" value="ENTER" type="submit">
+                <input name="btnEdit" value="EDIT" type="submit">
             </div>
         </div>
 
@@ -94,4 +93,3 @@ if (isset($_POST['btnInput'])) {
 </form>
 </body>
 </html>
-

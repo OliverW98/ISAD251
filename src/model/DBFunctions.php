@@ -74,3 +74,9 @@ function deleteAppointment($appointmentID)
     $statement = getConnection()->prepare("CALL deleteAppointment ('".$appointmentID."')");
     $statement->execute();
 }
+
+function editAppointment($appointmentID,$appointmentDate,$appointmentDetails,$numOfPatients)
+{
+    $statement = getConnection()->prepare("CALL editAppointment ('".$appointmentID."','".$appointmentDate."','".$appointmentDetails."','".$numOfPatients."')");
+    $statement->execute();
+}
