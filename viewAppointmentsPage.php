@@ -4,6 +4,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/DBFunctions.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
+session_start();
 $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
 $txtAppList = fillTextArea($appointmentsArray);
@@ -33,9 +34,16 @@ function findAppointment($array,$date){
     return $txt;
 }
 
+if (isset($_POST['btnEditAppointment'])){
+    $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
+    header("Location: editAppointmentPage.php");
+
+}
+
 if (isset($_POST['btnViewAppointment'])){
 
     $selectedDate = $_POST['selectAppointmentDate'];
+
     $txtAppDetails = findAppointment($appointmentsArray,$selectedDate);
 }
 

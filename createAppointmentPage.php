@@ -19,6 +19,8 @@ if (isset($_POST['btnInput'])) {
 
     $tempNumOfPatients = $_POST['numOfPatientsInput'];
 
+    //TO DO : can not create a past appointment (date cant be in the past)
+
     if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])){
         $paraOutputColour= 'red';
         $paraOutput = "Make sure to fill all fields.";
