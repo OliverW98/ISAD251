@@ -12,6 +12,8 @@ $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
 $txtAppList = fillTextArea($appointmentsArray);
 $txtAppDetails ='';
+$paraOutput = '';
+$paraOutputColour= 'black';
 
 function fillTextArea($array){
     $txt ='';
@@ -44,15 +46,22 @@ if (isset($_POST['btnViewAppointment'])){
 }
 
 if (isset($_POST['btnEditAppointment'])){
+
     $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
     header("Location: editAppointmentPage.php");
 
 }
 
 if (isset($_POST['btnAddNotes'])){
-    $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
-    header("Location: addAppointmentNotes.php");
-
+    $appdate = new DateTime($_POST['selectAppointmentDate']);
+    $today = new DateTime(date("Y-m-d H:i:s",time()));
+    if ($appdate < $today){
+        $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
+        header("Location: addAppointmentNotes.php");
+    }else{
+        $paraOutputColour= 'red';
+        $paraOutput = "Can only add notes to Past Appointments";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -93,6 +102,11 @@ if (isset($_POST['btnAddNotes'])){
     <div class="row">
         <div class="col-sm-12">
             <input name="btnAddNotes"value="Add Notes" type="submit">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="color: <?php echo $paraOutputColour; ?>" > <?php echo $paraOutput; ?> </p>
         </div>
     </div>
 </form>
