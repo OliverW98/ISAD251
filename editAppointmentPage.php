@@ -108,7 +108,7 @@ if (isset($_POST['btnEdit'])) {
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnBack" value="Back" type="button" onclick="location.href='index.php'">
+                <input name="btnBack" value="Back" type="button" onclick="location.href='viewAppointmentsPage.php'">
             </div>
         </div>
     </div>

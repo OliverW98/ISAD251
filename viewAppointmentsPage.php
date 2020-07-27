@@ -4,6 +4,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/DBFunctions.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
+// TO DO : view date button resets the select box. this leads to the edit being messed up.
+
+
 session_start();
 $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
@@ -34,19 +37,23 @@ function findAppointment($array,$date){
     return $txt;
 }
 
+if (isset($_POST['btnViewAppointment'])){
+
+    $selectedDate = $_POST['selectAppointmentDate'];
+    $txtAppDetails = findAppointment($appointmentsArray,$selectedDate);
+}
+
 if (isset($_POST['btnEditAppointment'])){
     $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
     header("Location: editAppointmentPage.php");
 
 }
 
-if (isset($_POST['btnViewAppointment'])){
+if (isset($_POST['btnAddNotes'])){
+    $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
+    header("Location: addAppointmentNotes.php");
 
-    $selectedDate = $_POST['selectAppointmentDate'];
-
-    $txtAppDetails = findAppointment($appointmentsArray,$selectedDate);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +88,11 @@ if (isset($_POST['btnViewAppointment'])){
     <div class="row">
         <div class="col-sm-12">
             <input name="btnEditAppointment" value="Edit Appointment" type="submit">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input name="btnAddNotes"value="Add Notes" type="submit">
         </div>
     </div>
 </form>

@@ -80,3 +80,8 @@ function editAppointment($appointmentID,$appointmentDate,$appointmentDetails,$nu
     $statement = getConnection()->prepare("CALL editAppointment ('".$appointmentID."','".$appointmentDate."','".$appointmentDetails."','".$numOfPatients."')");
     $statement->execute();
 }
+function addAppointmentNotes($appointmentID, $appointmentNotes)
+{
+    $statement = getConnection()->prepare("CALL addAppointmentNotes ('".$appointmentID."','".$appointmentNotes."')");
+    $statement->execute();
+}
