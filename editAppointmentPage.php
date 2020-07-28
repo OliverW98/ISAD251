@@ -14,7 +14,6 @@ $paraOutputColour= 'black';
 $pastAppointment = pastAppointment($selectedAppointmentDate);
 
 //TO DO : Date maybe?
-//        Notes? (greyed out for future app)
 
 function pastAppointment($selectedAppointmentDate){
     $appdate = new DateTime($selectedAppointmentDate);
@@ -25,7 +24,6 @@ function pastAppointment($selectedAppointmentDate){
         return false;
     }
 }
-
 
 foreach ($appointmentsArray as $app)
 {

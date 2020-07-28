@@ -8,7 +8,7 @@ $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
 $selectedAppointmentDate = $_SESSION['selectedAppointmentDate'];
 $selectedAppointmentID = findAppointmentID($selectedAppointmentDate,$appointmentsArray);
-$paraOutput = '';
+$paraOutput = $hasNotes = '';
 $paraOutputColour= 'black';
 
 function addUserNotes($ID,$notes)
@@ -24,6 +24,14 @@ function findAppointmentID($date,$array)
         {
             return $array[$i]->getAppointmentID();
         }
+    }
+}
+
+foreach ($appointmentsArray as $app){
+    if($app->getAppointmentID() == $selectedAppointmentID && $app->getAppointmentNotes() != ''){
+        $hasNotes = true;
+        $paraOutputColour= 'red';
+        $paraOutput = "Appointment already has notes. Please go to the Edit page.";
     }
 }
 
@@ -60,13 +68,13 @@ if (isset($_POST['btnAdd'])) {
         <div class="row">
             <div class="col-sm-12">
                 <label for="NotesInput">Notes : </label>
-                <input name="NotesInput" type="text">
+                <input name="NotesInput"<?php if ($hasNotes == true){ ?> disabled <?php   } ?>  type="text">
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnAdd" value="Add" type="submit">
+                <input name="btnAdd" <?php if ($hasNotes == true){ ?> disabled <?php   } ?> value="Add" type="submit">
             </div>
         </div>
 
