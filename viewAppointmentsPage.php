@@ -60,7 +60,7 @@ if (isset($_POST['btnAddNotes'])){
         header("Location: addAppointmentNotes.php");
     }else{
         $paraOutputColour= 'red';
-        $paraOutput = "Can only add notes to Past Appointments";
+        $paraOutput = "Can only add notes to Past Appointments.";
     }
 }
 ?>

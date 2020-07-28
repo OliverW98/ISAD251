@@ -6,10 +6,12 @@ class user
 
     private $userID;
     private $appointmentsArray = array();
+    private $deadlineArray = array();
 
-    public function __construct($userId, array $appointmentArray){
+    public function __construct($userId, array $appointmentArray, array $deadlineArray){
         $this->userID = $userId;
         $this->appointmentsArray = $appointmentArray;
+        $this->deadlineArray = $deadlineArray;
     }
 
     /**
@@ -21,11 +23,11 @@ class user
     }
 
     /**
-     * @param array $appointmentsArray
+     * @return array
      */
-    public function setAppointmentsArray($appointmentsArray)
+    public function getDeadlineArray()
     {
-        $this->appointmentsArray = $appointmentsArray;
+        return $this->deadlineArray;
     }
 
 }

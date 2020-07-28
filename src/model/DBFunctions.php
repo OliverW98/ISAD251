@@ -24,17 +24,19 @@ function getUser()
     $userID = 1; // only 1 user
 
     $appointmentData = getAppointments($userID); // fetches all the appointments for the user
+    $deadlineData = getDeadlines($userID);
 
-    $user = createUserObject($userID, $appointmentData); // creates a user object
+    $user = createUserObject($userID, $appointmentData,$deadlineData); // creates a user object
 
     return $user;
 
 }
 
-function createUserObject($userID, $appointmentData)
+function createUserObject($userID, $appointmentData, $deadlineData)
 {
 
     $appointmentsArray = array();
+    $deadlinesArray = array();
 
     for ($i =0 ; $i< count($appointmentData); $i++)
     {
@@ -47,11 +49,23 @@ function createUserObject($userID, $appointmentData)
 
         $appointment = new appointment($appointmentID,$userID,$appointmentDate,$appointmentDetails,$appointmentNotes,$numOfPatients);
 
-
         array_push($appointmentsArray, $appointment);
     }
 
-    return $user = new user($userID, $appointmentsArray);
+    for ($i =0 ; $i< count($deadlineData); $i++)
+    {
+        $deadlineID = $deadlineData[$i]['deadlineID'];
+        $deadlineUserID = $deadlineData[$i]['deadlineUserID'];
+        $deadlineDate = $deadlineData[$i]['deadlineDate'];
+        $deadlineDetails = $deadlineData[$i]['deadlineDetails'];
+        $deadlineMet = $deadlineData[$i]['deadlineMet'];
+
+        $deadline = new deadline($deadlineID,$deadlineUserID,$deadlineDate,$deadlineDetails,$deadlineMet);
+
+        array_push($deadlinesArray,$deadline);
+    }
+
+    return $user = new user($userID, $appointmentsArray,$deadlinesArray);
 }
 
 
@@ -84,4 +98,11 @@ function addAppointmentNotes($appointmentID, $appointmentNotes)
 {
     $statement = getConnection()->prepare("CALL addAppointmentNotes ('".$appointmentID."','".$appointmentNotes."')");
     $statement->execute();
+}
+function getDeadlines($userID){
+    $statement = getConnection()->prepare("CALL getDeadlines ('".$userID."')");
+    $statement->execute();
+    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $data;
 }
