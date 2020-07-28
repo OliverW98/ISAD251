@@ -9,12 +9,23 @@ $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
 $selectedAppointmentDate = $_SESSION['selectedAppointmentDate'];
 $selectedAppointmentID = findAppointmentID($selectedAppointmentDate,$appointmentsArray);
-$numOfPatientsOutput = $detailsOutput = '';
-$paraOutput = '';
+$numOfPatientsOutput = $detailsOutput = $paraOutput = $notesOutput = '';
 $paraOutputColour= 'black';
+$pastAppointment = pastAppointment($selectedAppointmentDate);
 
 //TO DO : Date maybe?
 //        Notes? (greyed out for future app)
+
+function pastAppointment($selectedAppointmentDate){
+    $appdate = new DateTime($selectedAppointmentDate);
+    $today = new DateTime(date("Y-m-d H:i:s",time()));
+    if ($appdate < $today){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 foreach ($appointmentsArray as $app)
 {
@@ -22,12 +33,19 @@ foreach ($appointmentsArray as $app)
     {
         $numOfPatientsOutput = (int)$app->getNumOfPatients();
         $detailsOutput = $app->getAppointmentDetails();
+        $notesOutput = $app->getAppointmentNotes();
     }
 }
 
-function editUserAppointment($ID,$datetime, $details, $numOfPatients)
+function editUserAppointmentWithNotes($ID,$datetime, $details,$notes, $numOfPatients)
 {
-    editAppointment($ID,$datetime,$details, $numOfPatients);
+    editAppointment($ID,$datetime,$details,$notes, $numOfPatients);
+}
+
+function editUserAppointmentNoNotes($ID,$datetime, $details, $numOfPatients)
+{
+    $notes = "";
+    editAppointment($ID,$datetime,$details,$notes, $numOfPatients);
 }
 
 function findAppointmentID($date,$array)
@@ -52,7 +70,12 @@ if (isset($_POST['btnEdit'])) {
         $paraOutputColour = 'red';
         $paraOutput = 'Number of patients must be positive.';
     }else{
-        editUserAppointment($selectedAppointmentID,$selectedAppointmentDate,$_POST['detailsInput'], $_POST['numOfPatientsInput']);
+        if($pastAppointment == false){
+            editUserAppointmentNoNotes($selectedAppointmentID,$selectedAppointmentDate,$_POST['detailsInput'], $_POST['numOfPatientsInput']);
+        }else{
+            editUserAppointmentWithNotes($selectedAppointmentID,$selectedAppointmentDate,$_POST['detailsInput'],$_POST['notesInput'], $_POST['numOfPatientsInput']);
+            $notesOutput = $_POST['notesInput'];
+        }
         $numOfPatientsOutput = $_POST['numOfPatientsInput'];
         $detailsOutput = $_POST['detailsInput'];
         $paraOutputColour= 'green';
@@ -90,6 +113,13 @@ if (isset($_POST['btnEdit'])) {
             <div class="col-sm-12">
                 <label for="detailsInput">Details : </label>
                 <input name="detailsInput" type="text" value="<?php echo $detailsOutput?>" >
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="notesInput">Notes : </label>
+                <input name="notesInput" type="text" <?php if ($pastAppointment == false){ ?> disabled <?php   } ?> value="<?php echo $notesOutput?>" >
             </div>
         </div>
         <br>
