@@ -2,6 +2,7 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/DBFunctions.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/src/model/deadline.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $user = getUser();
