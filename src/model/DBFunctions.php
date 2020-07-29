@@ -94,15 +94,25 @@ function editAppointment($appointmentID,$appointmentDate,$appointmentDetails,$ap
     $statement = getConnection()->prepare("CALL editAppointment ('".$appointmentID."','".$appointmentDate."','".$appointmentDetails."','".$appointmentNotes."','".$numOfPatients."')");
     $statement->execute();
 }
+
 function addAppointmentNotes($appointmentID, $appointmentNotes)
 {
     $statement = getConnection()->prepare("CALL addAppointmentNotes ('".$appointmentID."','".$appointmentNotes."')");
     $statement->execute();
 }
-function getDeadlines($userID){
+
+function getDeadlines($userID)
+{
     $statement = getConnection()->prepare("CALL getDeadlines ('".$userID."')");
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $data;
 }
+
+function recordDeadline($userID , $deadlineDate , $deadlineDetails, $deadlineMet)
+{
+    $statement = getConnection()->prepare("CALL recordDeadline ('".$userID."','".$deadlineDate."','".$deadlineDetails."','".$deadlineMet."')");
+    $statement->execute();
+}
+

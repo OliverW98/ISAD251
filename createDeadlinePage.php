@@ -2,35 +2,28 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/DBFunctions.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/src/model/deadline.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $paraOutput = '';
 $paraOutputColour= 'black';
 
-function RecordUserAppointment($datetime, $details, $numOfPatients)
+function RecordUserDeadline($datetime, $details)
 {
     $UserID = 1;
-    $notes = '';
-    recordAppointment($UserID,$datetime,$details,$notes, $numOfPatients);
+    $met = 'false';
+    recordDeadline($UserID,$datetime,$details,$met);
 }
-
 
 if (isset($_POST['btnInput'])) {
 
-    $tempNumOfPatients = $_POST['numOfPatientsInput'];
-
-    //TO DO : can not create a past appointment (date cant be in the past)
-
-    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])){
+    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput'])){
         $paraOutputColour= 'red';
         $paraOutput = "Make sure to fill all fields.";
-    }elseif ($tempNumOfPatients <= 0){
-        $paraOutputColour = 'red';
-        $paraOutput = 'Number of patients must be positive.';
     }else{
-        RecordUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
+        RecordUserDeadline($_POST['datetimeInput'],$_POST['detailsInput']);
         $paraOutputColour= 'green';
-        $paraOutput = "Appointment created";
+        $paraOutput = "Deadline created";
     }
 }
 
@@ -39,7 +32,7 @@ if (isset($_POST['btnInput'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Appointments</title>
+    <title>Create Deadline</title>
 </head>
 <body>
 
@@ -61,13 +54,6 @@ if (isset($_POST['btnInput'])) {
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label for="numOfPatientsInput">Number of Patients : </label>
-                <input name="numOfPatientsInput" type="number">
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-12">
                 <label for="detailsInput">Details : </label>
                 <input name="detailsInput" placeholder="..." type="text">
             </div>
@@ -84,7 +70,6 @@ if (isset($_POST['btnInput'])) {
                 <p style="color: <?php echo $paraOutputColour; ?>" > <?php echo $paraOutput; ?> </p>
             </div>
         </div>
-
         <br>
         <div class="row">
             <div class="col-sm-12">
@@ -92,8 +77,6 @@ if (isset($_POST['btnInput'])) {
             </div>
         </div>
     </div>
-
 </form>
 </body>
 </html>
-

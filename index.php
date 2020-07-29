@@ -18,6 +18,7 @@
 </div>
 <div class="row">
     <div class="col-sm-12">
+        <input name="createDeadlinePageBtn" value="Create Deadline" type="button" onclick="location.href='createDeadlinePage.php'">
         <input name="viewDeadlinePageBtn" value="View Deadline" type="button" onclick="location.href='viewDeadlinesPage.php'">
     </div>
 </div>
