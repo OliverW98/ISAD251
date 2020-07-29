@@ -2,6 +2,7 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/DBFunctions.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/src/model/deadline.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 // TO DO : view date button resets the select box. this leads to the edit being messed up.
@@ -10,11 +11,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 session_start();
 $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
+//$newArray = ($user->getDeadlineArray());
 $txtAppList = fillTextArea($appointmentsArray);
-$txtAppDetails ='';
-$paraOutput = '';
+$txtAppDetails = $paraOutput ='';
 $paraOutputColour= 'black';
 
+//var_dump($newArray);
 function fillTextArea($array){
     $txt ='';
     for ($i = 0; $i < count($array); $i++)
@@ -86,7 +88,7 @@ if (isset($_POST['btnAddNotes'])){
                     <option name="option"><?php echo $item->getAppointmentDate()?></option>
                 <?php } ?>
             </select>
-            <textarea name="txtAppList"  rows="10" cols="75"><?php echo $txtAppDetails?></textarea>
+            <textarea name="txtAppDetails"  rows="10" cols="75"><?php echo $txtAppDetails?></textarea>
         </div>
     </div>
     <div class="row">

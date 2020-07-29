@@ -16,6 +16,10 @@
         <input name="cancelAppointmentsPageBtn" value="Cancel Appointments" type="button" onclick="location.href='cancelAppointmentPage.php'">
     </div>
 </div>
-
+<div class="row">
+    <div class="col-sm-12">
+        <input name="viewDeadlinePageBtn" value="View Deadline" type="button" onclick="location.href='viewDeadlinesPage.php'">
+    </div>
+</div>
 </body>
 </html>
