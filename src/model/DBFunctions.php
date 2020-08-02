@@ -116,3 +116,9 @@ function recordDeadline($userID , $deadlineDate , $deadlineDetails, $deadlineMet
     $statement->execute();
 }
 
+function deleteDeadline($deadlineID)
+{
+    $statement = getConnection()->prepare("CALL deleteDeadline ('".$deadlineID."')");
+    $statement->execute();
+}
+

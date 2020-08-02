@@ -6,32 +6,33 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/deadline.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $user = getUser();
-$appointmentsArray = $user->getAppointmentsArray();
+$deadlineArray = $user->getDeadlineArray();
 $paraOutput = '';
 $paraOutputColour= 'black';
 
-function findAppointment($array,$date)
+function findDeadline($array,$date)
 {
     for ($i = 0; $i < count($array); $i++)
     {
-        if($array[$i]->getAppointmentDate() == $date)
+        if($array[$i]->getDeadlineDate() == $date)
         {
-            return (int)$array[$i]->getAppointmentID();
+            return (int)$array[$i]->getDeadlineID();
 
         }
     }
 }
 
-function cancelUserAppointment($array , $date)
+function cancelUserDeadline($array , $date)
 {
-    deleteAppointment(findAppointment($array,$date));
+    deleteDeadline(findDeadline($array,$date)); // SQL needed
 }
 
-if(isset($_POST['btnCancelAppointment']))
+
+if(isset($_POST['btnCancelDeadline']))
 {
-    $selectedDate = $_POST['selectAppointmentDate'];
-    cancelUserAppointment($appointmentsArray,$selectedDate);
-    $paraOutput = 'Appointment Canceled';
+    $selectedDate = $_POST['selectDeadlineDate'];
+    cancelUserDeadline($deadlineArray,$selectedDate); // SQL needed
+    $paraOutput = 'Deadline Canceled';
     $paraOutputColour= 'green';
     header("Refresh:0"); // refreshes the page
 }
@@ -41,17 +42,17 @@ if(isset($_POST['btnCancelAppointment']))
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cancel Appointments</title>
+    <title>Cancel Deadline</title>
 </head>
 
 <body>
-<h1>Cancel Appointments</h1>
+<h1>Cancel Deadline</h1>
 <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
     <div class="row">
         <div class="col-sm-12">
-            <select name="selectAppointmentDate">
-                <?php foreach ($appointmentsArray as $item){ ?>
-                    <option name="option"><?php echo $item->getAppointmentDate()?></option>
+            <select name="selectDeadlineDate">
+                <?php foreach ($deadlineArray as $item){ ?>
+                    <option name="option"><?php echo $item->getDeadlineDate()?></option>
                 <?php } ?>
             </select>
         </div>
@@ -59,7 +60,7 @@ if(isset($_POST['btnCancelAppointment']))
     <br>
     <div class="row">
         <div class="col-sm-12">
-            <input name="btnCancelAppointment" value="Cancel Appointment" type="submit">
+            <input name="btnCancelDeadline" value="Cancel Deadline" type="submit">
         </div>
     </div>
 </form>
