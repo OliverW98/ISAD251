@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>home page</title>
+    <title>Home page</title>
 </head>
 <body>
 <h1>Home page</h1>
@@ -20,6 +20,7 @@
     <div class="col-sm-12">
         <input name="createDeadlinePageBtn" value="Create Deadline" type="button" onclick="location.href='createDeadlinePage.php'">
         <input name="viewDeadlinePageBtn" value="View Deadline" type="button" onclick="location.href='viewDeadlinesPage.php'">
+        <input name="cancelDeadlinePageBtn" value="Cancel Deadline" type="button" onclick="location.href='cancelDeadline.php'">
     </div>
 </div>
 </body>

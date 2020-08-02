@@ -31,9 +31,9 @@ if(isset($_POST['btnCancelAppointment']))
 {
     $selectedDate = $_POST['selectAppointmentDate'];
     cancelUserAppointment($appointmentsArray,$selectedDate);
+    header("Refresh:0"); // refreshes the page
     $paraOutput = 'Appointment Canceled';
     $paraOutputColour= 'green';
-    header("Refresh:0"); // refreshes the page
 }
 
 ?>

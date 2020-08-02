@@ -32,9 +32,9 @@ if(isset($_POST['btnCancelDeadline']))
 {
     $selectedDate = $_POST['selectDeadlineDate'];
     cancelUserDeadline($deadlineArray,$selectedDate); // SQL needed
+    header("Refresh:0"); // refreshes the page
     $paraOutput = 'Deadline Canceled';
     $paraOutputColour= 'green';
-    header("Refresh:0"); // refreshes the page
 }
 
 ?>
