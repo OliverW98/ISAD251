@@ -122,3 +122,8 @@ function deleteDeadline($deadlineID)
     $statement->execute();
 }
 
+function editDeadline($deadlineID, $deadlineDate , $deadlineDetails, $deadlineMet)
+{
+    $statement = getConnection()->prepare("CALL editDeadline ('".$deadlineID."','".$deadlineDate."','".$deadlineDetails."','".$deadlineMet."')");
+    $statement->execute();
+}

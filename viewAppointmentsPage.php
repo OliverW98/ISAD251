@@ -11,12 +11,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 session_start();
 $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
-//$newArray = ($user->getDeadlineArray());
 $txtAppList = fillTextArea($appointmentsArray);
 $txtAppDetails = $paraOutput ='';
 $paraOutputColour= 'black';
 
-//var_dump($newArray);
 function fillTextArea($array){
     $txt ='';
     for ($i = 0; $i < count($array); $i++)
@@ -42,16 +40,13 @@ function findAppointment($array,$date){
 }
 
 if (isset($_POST['btnViewAppointment'])){
-
     $selectedDate = $_POST['selectAppointmentDate'];
     $txtAppDetails = findAppointment($appointmentsArray,$selectedDate);
 }
 
 if (isset($_POST['btnEditAppointment'])){
-
     $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
     header("Location: editAppointmentPage.php");
-
 }
 
 if (isset($_POST['btnAddNotes'])){

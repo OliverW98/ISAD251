@@ -7,6 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 // TO DO : view date button resets the select box. this leads to the edit being messed up.
 
+session_start();
 $user = getUser();
 $deadlinesArray = ($user->getDeadlineArray());
 $txtDeadlineList = fillTextArea($deadlinesArray);
@@ -42,6 +43,11 @@ if (isset($_POST['btnViewDeadline'])){
     $txtDeadlineDetails = findDeadline($deadlinesArray,$selectedDate);
 }
 
+if (isset($_POST['btnEditDeadline'])){
+    $_SESSION['selectedDeadlineDate'] = $_POST['selectDeadlineDate'];
+    header("Location: editDeadlinePage.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +78,7 @@ if (isset($_POST['btnViewDeadline'])){
 <div class="row">
     <div class="col-sm-12">
         <input name="btnViewDeadline" value="View Deadline" type="submit">
+        <input name="btnEditDeadline" value="Edit Deadline" type="submit">
     </div>
 </div>
 <div class="row">
