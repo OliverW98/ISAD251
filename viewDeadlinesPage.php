@@ -90,6 +90,19 @@ if(isset($_POST['btnDeadlineMet'])){
     }
 }
 
+function cancelUserDeadline($array , $date)
+{
+    deleteDeadline(findDeadlineID($array,$date));
+}
+
+
+if(isset($_POST['btnCancelDeadline']))
+{
+    $selectedDate = $_POST['selectDeadlineDate'];
+    cancelUserDeadline($deadlinesArray,$selectedDate);
+    header("Refresh:0"); // refreshes the page
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -128,6 +141,8 @@ if(isset($_POST['btnDeadlineMet'])){
         <input name="btnViewDeadline" value="View Deadline" type="submit">
         <input name="btnEditDeadline" value="Edit Deadline" type="submit">
         <input name="btnDeadlineMet" value="Toggle Deadline Met" type="submit">
+        <input name="btnCreateDeadlinePage" value="Create Deadline" type="button" onclick="location.href='createDeadlinePage.php'">
+        <input name="btnCancelDeadline" value="Cancel Deadline" type="submit">
     </div>
 </div>
 <div class="row">

@@ -24,7 +24,7 @@ function fillTextArea($array){
     return $txt;
 }
 
-function findAppointment($array,$date){
+function findAppointmentDetails($array,$date){
     $txt = '';
     for ($i = 0; $i < count($array); $i++)
     {
@@ -39,9 +39,33 @@ function findAppointment($array,$date){
     return $txt;
 }
 
+function findAppointmentID($array,$date)
+{
+    for ($i = 0; $i < count($array); $i++)
+    {
+        if($array[$i]->getAppointmentDate() == $date)
+        {
+            return (int)$array[$i]->getAppointmentID();
+
+        }
+    }
+}
+
+function cancelUserAppointment($array , $date)
+{
+    deleteAppointment(findAppointmentID($array,$date));
+}
+
+if(isset($_POST['btnCancelAppointment']))
+{
+    $selectedDate = $_POST['selectAppointmentDate'];
+    cancelUserAppointment($appointmentsArray,$selectedDate);
+    header("Refresh:0"); // refreshes the page
+}
+
 if (isset($_POST['btnViewAppointment'])){
     $selectedDate = $_POST['selectAppointmentDate'];
-    $txtAppDetails = findAppointment($appointmentsArray,$selectedDate);
+    $txtAppDetails = findAppointmentDetails($appointmentsArray,$selectedDate);
 }
 
 if (isset($_POST['btnEditAppointment'])){
@@ -105,6 +129,16 @@ if (isset($_POST['btnAddNotes'])){
     <div class="row">
         <div class="col-sm-12">
             <input name="btnAddNotes"value="Add Notes" type="submit">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input name="creatAppointmentPageBtn" value="Create Appointment" type="button" onclick="location.href='createAppointmentPage.php'">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input name="btnCancelAppointment" value="Cancel Appointment" type="submit">
         </div>
     </div>
     <div class="row">
