@@ -11,7 +11,7 @@ session_start();
 $user = getUser();
 $deadlinesArray = ($user->getDeadlineArray());
 $txtDeadlineList = fillTextArea($deadlinesArray);
-$txtDeadlineDetails = $paraOutput ='';
+$txtDeadlineDetails = $paraOutput = $selectedDeadlineID = '';
 $paraOutputColour= 'black';
 
 function fillTextArea($array){
@@ -23,11 +23,22 @@ function fillTextArea($array){
     return $txt;
 }
 
-function findDeadline($array,$date){
-    $txt = '';
+function findDeadlineID($array,$date)
+{
     for ($i = 0; $i < count($array); $i++)
     {
         if($array[$i]->getDeadlineDate() == $date)
+        {
+            return $array[$i]->getDeadlineID();
+        }
+    }
+}
+
+function findDeadlineDetails($array,$ID){
+    $txt = '';
+    for ($i = 0; $i < count($array); $i++)
+    {
+        if($array[$i]->getDeadlineID() == $ID)
         {
             $txt = "Deadline Date    : {$array[$i]->getDeadlineDate()} \n";
             $txt .= "Deadline Details : {$array[$i]->getDeadlineDetails()} \n";
@@ -37,15 +48,46 @@ function findDeadline($array,$date){
     return $txt;
 }
 
+function findDeadlineMet($array,$ID){
+    for ($i = 0; $i < count($array); $i++)
+    {
+        if($array[$i]->getDeadlineID() == $ID)
+        {
+            return $array[$i]->getDeadlineMet();
+        }
+    }
+}
+
+function editUserDeadlineMet($ID , $met)
+{
+    editDeadlineMet($ID, $met);
+}
+
 if (isset($_POST['btnViewDeadline'])){
 
     $selectedDate = $_POST['selectDeadlineDate'];
-    $txtDeadlineDetails = findDeadline($deadlinesArray,$selectedDate);
+    $selectedDeadlineID = findDeadlineID($deadlinesArray,$selectedDate);
+    $txtDeadlineDetails = findDeadlineDetails($deadlinesArray,$selectedDeadlineID);
 }
 
 if (isset($_POST['btnEditDeadline'])){
     $_SESSION['selectedDeadlineDate'] = $_POST['selectDeadlineDate'];
     header("Location: editDeadlinePage.php");
+}
+
+if(isset($_POST['btnDeadlineMet'])){
+
+    $selectedDate = $_POST['selectDeadlineDate'];
+    $selectedDeadlineID = findDeadlineID($deadlinesArray,$selectedDate);
+    if (findDeadlineMet($deadlinesArray,$selectedDeadlineID) == 'false'){
+        editUserDeadlineMet($selectedDeadlineID, 'true');
+        $paraOutputColour= 'green';
+        $paraOutput= 'Deadline is now met';
+    }else{
+        editUserDeadlineMet($selectedDeadlineID, 'false');
+        $paraOutputColour= 'green';
+        $paraOutput= 'Deadline is now not met';
+    }
 }
 
 ?>
@@ -79,6 +121,7 @@ if (isset($_POST['btnEditDeadline'])){
     <div class="col-sm-12">
         <input name="btnViewDeadline" value="View Deadline" type="submit">
         <input name="btnEditDeadline" value="Edit Deadline" type="submit">
+        <input name="btnDeadlineMet" value="Toggle Deadline Met" type="submit">
     </div>
 </div>
 <div class="row">
