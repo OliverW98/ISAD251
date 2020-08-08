@@ -12,24 +12,23 @@ session_start();
 $user = getUser();
 $appointmentsArray = ($user->getAppointmentsArray());
 $txtAppList = fillTextArea($appointmentsArray);
-$txtAppDetails = $paraOutput ='';
-$paraOutputColour= 'black';
+$txtAppDetails = $paraOutput = '';
+$paraOutputColour = 'black';
 
-function fillTextArea($array){
-    $txt ='';
-    for ($i = 0; $i < count($array); $i++)
-    {
+function fillTextArea($array)
+{
+    $txt = '';
+    for ($i = 0; $i < count($array); $i++) {
         $txt .= "You have an appointment for {$array[$i]->getNumOfPatients()} patients on : {$array[$i]->getAppointmentDate()}.\r\n";
     }
     return $txt;
 }
 
-function findAppointmentDetails($array,$date){
+function findAppointmentDetails($array, $date)
+{
     $txt = '';
-    for ($i = 0; $i < count($array); $i++)
-    {
-        if($array[$i]->getAppointmentDate() == $date)
-        {
+    for ($i = 0; $i < count($array); $i++) {
+        if ($array[$i]->getAppointmentDate() == $date) {
             $txt = "Appointment Date    : {$array[$i]->getAppointmentDate()} \n";
             $txt .= "Number of patients  : {$array[$i]->getNumOfPatients()} \n";
             $txt .= "Appointment Details : {$array[$i]->getAppointmentDetails()} \n";
@@ -39,48 +38,45 @@ function findAppointmentDetails($array,$date){
     return $txt;
 }
 
-function findAppointmentID($array,$date)
+function findAppointmentID($array, $date)
 {
-    for ($i = 0; $i < count($array); $i++)
-    {
-        if($array[$i]->getAppointmentDate() == $date)
-        {
+    for ($i = 0; $i < count($array); $i++) {
+        if ($array[$i]->getAppointmentDate() == $date) {
             return (int)$array[$i]->getAppointmentID();
 
         }
     }
 }
 
-function cancelUserAppointment($array , $date)
+function cancelUserAppointment($array, $date)
 {
-    deleteAppointment(findAppointmentID($array,$date));
+    deleteAppointment(findAppointmentID($array, $date));
 }
 
-if(isset($_POST['btnCancelAppointment']))
-{
+if (isset($_POST['btnCancelAppointment'])) {
     $selectedDate = $_POST['selectAppointmentDate'];
-    cancelUserAppointment($appointmentsArray,$selectedDate);
+    cancelUserAppointment($appointmentsArray, $selectedDate);
     header("Refresh:0"); // refreshes the page
 }
 
-if (isset($_POST['btnViewAppointment'])){
+if (isset($_POST['btnViewAppointment'])) {
     $selectedDate = $_POST['selectAppointmentDate'];
-    $txtAppDetails = findAppointmentDetails($appointmentsArray,$selectedDate);
+    $txtAppDetails = findAppointmentDetails($appointmentsArray, $selectedDate);
 }
 
-if (isset($_POST['btnEditAppointment'])){
+if (isset($_POST['btnEditAppointment'])) {
     $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
     header("Location: editAppointmentPage.php");
 }
 
-if (isset($_POST['btnAddNotes'])){
+if (isset($_POST['btnAddNotes'])) {
     $appdate = new DateTime($_POST['selectAppointmentDate']);
-    $today = new DateTime(date("Y-m-d H:i:s",time()));
-    if ($appdate < $today){
+    $today = new DateTime(date("Y-m-d H:i:s", time()));
+    if ($appdate < $today) {
         $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
         header("Location: addAppointmentNotes.php");
-    }else{
-        $paraOutputColour= 'red';
+    } else {
+        $paraOutputColour = 'red';
         $paraOutput = "Can only add notes to Past Appointments.";
     }
 }
@@ -97,62 +93,70 @@ if (isset($_POST['btnAddNotes'])){
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
 </head>
+
 <style>
-    textarea{
+    .appt-list {
         resize: none;
     }
 </style>
-<body>
-<h1>View Appointments</h1>
-<form method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
-    <div class="row">
-        <div class="col-sm-12">
-            <textarea name="txtAppList"  rows="10" cols="75"><?php echo $txtAppList?></textarea>
-            <select name="selectAppointmentDate">
-                <?php foreach ($appointmentsArray as $item){ ?>
-                    <option name="option"><?php echo $item->getAppointmentDate()?></option>
-                <?php } ?>
-            </select>
-            <textarea name="txtAppDetails"  rows="10" cols="75"><?php echo $txtAppDetails?></textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <input name="btnViewAppointment" value="View Appointment" type="submit">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <input name="btnEditAppointment" value="Edit Appointment" type="submit">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <input name="btnAddNotes"value="Add Notes" type="submit">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <input name="creatAppointmentPageBtn" value="Create Appointment" type="button" onclick="location.href='createAppointmentPage.php'">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <input name="btnCancelAppointment" value="Cancel Appointment" type="submit">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <p style="color: <?php echo $paraOutputColour; ?>" > <?php echo $paraOutput; ?> </p>
-        </div>
-    </div>
-</form>
 
-<div class="row">
-    <div class="col-sm-12">
-        <input name="btnBack" value="Back" type="button" onclick="location.href='index.php'">
+<body>
+<div class="container">
+    <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+        <div class="row mt-3 mb-3">
+            <div class="col-lg-12">
+                <h1 class="text-center">View Appointments</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <textarea class="appt-list form-control" rows="10"
+                              name="txtAppList"><?php echo $txtAppList ?></textarea>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="row">
+                    <select class="custom-select" name="selectAppointmentDate">
+                        <?php foreach ($appointmentsArray as $item) { ?>
+                            <option name="option"><?php echo $item->getAppointmentDate() ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="row mt-3">
+                    <div class="btn-group-vertical mx-auto">
+                        <input class="btn btn-light" name="btnViewAppointment" value="View Appointment" type="submit">
+
+
+                        <input class="btn btn-light" name="btnEditAppointment" value="Edit Appointment" type="submit">
+
+                        <input class="btn btn-light" name="btnAddNotes" value="Add Notes" type="submit">
+
+                        <input class="btn btn-light" name="creatAppointmentPageBtn" value="Create Appointment"
+                               type="button"
+                               onclick="location.href='createAppointmentPage.php'">
+
+                        <input class="btn btn-light" name="btnCancelAppointment" value="Cancel Appointment"
+                               type="submit">
+
+                        <p style="color: <?php echo $paraOutputColour; ?>"> <?php echo $paraOutput; ?> </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <textarea class="appt-list form-control" rows="10"
+                              name="txtAppDetails"><?php echo $txtAppDetails ?></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <input name="btnBack" class="btn btn-info" value="Back" type="button" onclick="location.href='index.php'">
+        </div>
     </div>
 </div>
-
 </body>
 </html>
