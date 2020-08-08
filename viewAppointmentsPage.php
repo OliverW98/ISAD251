@@ -127,16 +127,11 @@ if (isset($_POST['btnAddNotes'])) {
                 <div class="row mt-3">
                     <div class="btn-group-vertical mx-auto">
                         <input class="btn btn-light" name="btnViewAppointment" value="View Appointment" type="submit">
-
-
                         <input class="btn btn-light" name="btnEditAppointment" value="Edit Appointment" type="submit">
-
                         <input class="btn btn-light" name="btnAddNotes" value="Add Notes" type="submit">
-
                         <input class="btn btn-light" name="creatAppointmentPageBtn" value="Create Appointment"
                                type="button"
                                onclick="location.href='createAppointmentPage.php'">
-
                         <input class="btn btn-light" name="btnCancelAppointment" value="Cancel Appointment"
                                type="submit">
 
