@@ -1,9 +1,9 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/src/model/DBFunctions.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/src/model/deadline.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/app/src/model/DBFunctions.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/app/src/model/appointment.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/app/src/model/deadline.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/app/src/model/user.php';
 
 session_start();
 $user = getUser();
