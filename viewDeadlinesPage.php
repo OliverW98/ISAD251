@@ -148,10 +148,10 @@ if (isset($_POST['btnCancelDeadline'])) {
                         <input class="btn btn-light" name="btnEditDeadline" value="Edit Deadline" type="submit">
                         <input class="btn btn-light" name="btnDeadlineMet" value="Toggle Deadline Met"
                                type="submit">
-                        <input class="btn btn-light" name="btnCreateDeadlinePage" value="Create Deadline"
+                        <input class="btn btn-success" name="btnCreateDeadlinePage" value="Create Deadline"
                                type="button"
                                onclick="location.href='createDeadlinePage.php'">
-                        <input class="btn btn-light" name="btnCancelDeadline" value="Cancel Deadline" type="submit">
+                        <input class="btn btn-danger" name="btnCancelDeadline" value="Cancel Deadline" type="submit">
                         <p style="color: <?php echo $paraOutputColour; ?>"> <?php echo $paraOutput; ?> </p>
                     </div>
                 </div>

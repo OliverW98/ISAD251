@@ -53,21 +53,29 @@ if (isset($_POST['btnInput'])) {
 
         <div class="row">
             <div class="col-sm-12">
-                <label for="datetimeInput">Date And Time : </label>
-                <input type="datetime-local" name="datetimeInput">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="datetimeInput">Date And Time : </label>
+                    </div>
+                    <input class="form-control" type="datetime-local" name="datetimeInput">
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label for="detailsInput">Details : </label>
-                <input name="detailsInput" placeholder="..." type="text">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="detailsInput">Details : </label>
+                    </div>
+                    <input class="form-control" name="detailsInput" placeholder="..." type="text">
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnInput" value="Create" type="submit">
+                <input class="btn btn-success" name="btnInput" value="Create" type="submit">
             </div>
         </div>
 
@@ -79,7 +87,8 @@ if (isset($_POST['btnInput'])) {
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnBack" value="Back" type="button" onclick="location.href='viewDeadlinesPage.php'">
+                <input class="btn btn-info" name="btnBack" value="Back" type="button"
+                       onclick="location.href='viewDeadlinesPage.php'">
             </div>
         </div>
     </div>

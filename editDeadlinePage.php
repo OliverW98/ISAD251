@@ -9,32 +9,28 @@ session_start();
 $user = getUser();
 $deadlinesArray = ($user->getDeadlineArray());
 $selectedDeadlineDate = $_SESSION['selectedDeadlineDate'];
-$selectedDeadlineID = findDeadlineID($selectedDeadlineDate,$deadlinesArray);
-$datetimeOutput = $detailsOutput = $paraOutput = $deadlineMet  = '';
-$paraOutputColour= 'black';
+$selectedDeadlineID = findDeadlineID($selectedDeadlineDate, $deadlinesArray);
+$datetimeOutput = $detailsOutput = $paraOutput = $deadlineMet = '';
+$paraOutputColour = 'black';
 
-foreach ($deadlinesArray as $deadline)
-{
-    if ($deadline->getDeadlineID() == $selectedDeadlineID)
-    {
-        $datetime =  new DateTime($deadline->getDeadlineDate());
+foreach ($deadlinesArray as $deadline) {
+    if ($deadline->getDeadlineID() == $selectedDeadlineID) {
+        $datetime = new DateTime($deadline->getDeadlineDate());
         $datetimeOutput = "{$datetime->format('Y-m-d')}T{$datetime->format('H:i')}";
         $detailsOutput = $deadline->getDeadlineDetails();
-        $deadlineMet = $deadline-> getDeadlineMet();
+        $deadlineMet = $deadline->getDeadlineMet();
     }
 }
 
-function editUserDeadline($deadlineID , $deadlineDate , $deadlineDetails , $deadlineMet )
+function editUserDeadline($deadlineID, $deadlineDate, $deadlineDetails, $deadlineMet)
 {
-    editDeadline($deadlineID,$deadlineDate, $deadlineDetails, $deadlineMet);
+    editDeadline($deadlineID, $deadlineDate, $deadlineDetails, $deadlineMet);
 }
 
-function findDeadlineID($date,$array)
+function findDeadlineID($date, $array)
 {
-    for ($i = 0; $i < count($array); $i++)
-    {
-        if($array[$i]->getDeadlineDate() == $date)
-        {
+    for ($i = 0; $i < count($array); $i++) {
+        if ($array[$i]->getDeadlineDate() == $date) {
             return $array[$i]->getDeadlineID();
         }
     }
@@ -42,14 +38,14 @@ function findDeadlineID($date,$array)
 
 if (isset($_POST['btnEdit'])) {
 
-    if (empty($_POST['detailsInput']) || empty($_POST['datetimeInput'])){
-        $paraOutputColour= 'red';
+    if (empty($_POST['detailsInput']) || empty($_POST['datetimeInput'])) {
+        $paraOutputColour = 'red';
         $paraOutput = "Make sure to fill patients field.";
-    }else{
-        editUserDeadline($selectedDeadlineID , $_POST['datetimeInput'] , $_POST['detailsInput'] , $deadlineMet );
+    } else {
+        editUserDeadline($selectedDeadlineID, $_POST['datetimeInput'], $_POST['detailsInput'], $deadlineMet);
         $detailsOutput = $_POST['detailsInput'];
         $datetimeOutput = $_POST['datetimeInput'];
-        $paraOutputColour= 'green';
+        $paraOutputColour = 'green';
         $paraOutput = "Appointment Edited";
     }
 }
@@ -81,34 +77,44 @@ if (isset($_POST['btnEdit'])) {
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label for="dateInput">Date : </label>
-                <input name="datetimeInput" type="datetime-local" value="<?php echo $datetimeOutput?>" >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="dateInput">Date : </label>
+                    </div>
+                    <input class="form-control" name="datetimeInput" type="datetime-local"
+                           value="<?php echo $datetimeOutput ?>">
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label for="detailsInput">Details : </label>
-                <input name="detailsInput" type="text" value="<?php echo $detailsOutput?>" >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="detailsInput">Details : </label>
+                    </div>
+                    <input class="form-control" name="detailsInput" type="text" value="<?php echo $detailsOutput ?>">
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnEdit" value="EDIT" type="submit">
+                <input class="btn btn-warning" name="btnEdit" value="EDIT" type="submit">
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-12">
-                <p style="color: <?php echo $paraOutputColour; ?>" > <?php echo $paraOutput; ?> </p>
+                <p style="color: <?php echo $paraOutputColour; ?>"> <?php echo $paraOutput; ?> </p>
             </div>
         </div>
 
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnBack" value="Back" type="button" onclick="location.href='viewDeadlinesPage.php'">
+                <input class="btn btn-info" name="btnBack" value="Back" type="button"
+                       onclick="location.href='viewDeadlinesPage.php'">
             </div>
         </div>
     </div>
