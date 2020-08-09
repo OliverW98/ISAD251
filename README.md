@@ -1,5 +1,6 @@
 # ISAD251
-Soultion images:
+<h1>Soultion images:
+
 index
 ![index](/images/index.png)
 View Appointments Page
