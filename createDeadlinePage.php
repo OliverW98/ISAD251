@@ -6,23 +6,23 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/deadline.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $paraOutput = '';
-$paraOutputColour= 'black';
+$paraOutputColour = 'black';
 
 function RecordUserDeadline($datetime, $details)
 {
     $UserID = 1;
     $met = 'false';
-    recordDeadline($UserID,$datetime,$details,$met);
+    recordDeadline($UserID, $datetime, $details, $met);
 }
 
 if (isset($_POST['btnInput'])) {
 
-    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput'])){
-        $paraOutputColour= 'red';
+    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput'])) {
+        $paraOutputColour = 'red';
         $paraOutput = "Make sure to fill all fields.";
-    }else{
-        RecordUserDeadline($_POST['datetimeInput'],$_POST['detailsInput']);
-        $paraOutputColour= 'green';
+    } else {
+        RecordUserDeadline($_POST['datetimeInput'], $_POST['detailsInput']);
+        $paraOutputColour = 'green';
         $paraOutput = "Deadline created";
     }
 }
@@ -73,13 +73,13 @@ if (isset($_POST['btnInput'])) {
 
         <div class="row">
             <div class="col-sm-12">
-                <p style="color: <?php echo $paraOutputColour; ?>" > <?php echo $paraOutput; ?> </p>
+                <p style="color: <?php echo $paraOutputColour; ?>"> <?php echo $paraOutput; ?> </p>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnBack" value="Back" type="button" onclick="location.href='index.php'">
+                <input name="btnBack" value="Back" type="button" onclick="location.href='viewDeadlinesPage.php'">
             </div>
         </div>
     </div>

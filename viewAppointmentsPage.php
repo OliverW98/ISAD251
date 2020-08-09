@@ -129,10 +129,10 @@ if (isset($_POST['btnAddNotes'])) {
                         <input class="btn btn-light" name="btnViewAppointment" value="View Appointment" type="submit">
                         <input class="btn btn-light" name="btnEditAppointment" value="Edit Appointment" type="submit">
                         <input class="btn btn-light" name="btnAddNotes" value="Add Notes" type="submit">
-                        <input class="btn btn-light" name="creatAppointmentPageBtn" value="Create Appointment"
+                        <input class="btn btn-success" name="creatAppointmentPageBtn" value="Create Appointment"
                                type="button"
                                onclick="location.href='createAppointmentPage.php'">
-                        <input class="btn btn-light" name="btnCancelAppointment" value="Cancel Appointment"
+                        <input class="btn btn-danger" name="btnCancelAppointment" value="Cancel Appointment"
                                type="submit">
 
                         <p style="color: <?php echo $paraOutputColour; ?>"> <?php echo $paraOutput; ?> </p>

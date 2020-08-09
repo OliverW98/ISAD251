@@ -18,8 +18,10 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <input name="viewAppointmentsPageBtn" value="View Appointments" type="button" onclick="location.href='viewAppointmentsPage.php'">
-            <input name="viewDeadlinePageBtn" value="View Deadline" type="button" onclick="location.href='viewDeadlinesPage.php'">
+            <input class="btn btn-light" name="viewAppointmentsPageBtn" value="View Appointments" type="button"
+                   onclick="location.href='viewAppointmentsPage.php'">
+            <input class="btn btn-light" name="viewDeadlinePageBtn" value="View Deadline" type="button"
+                   onclick="location.href='viewDeadlinesPage.php'">
         </div>
     </div>
 </div>

@@ -5,13 +5,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/appointment.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 $paraOutput = '';
-$paraOutputColour= 'black';
+$paraOutputColour = 'black';
 
 function RecordUserAppointment($datetime, $details, $numOfPatients)
 {
     $UserID = 1;
     $notes = '';
-    recordAppointment($UserID,$datetime,$details,$notes, $numOfPatients);
+    recordAppointment($UserID, $datetime, $details, $notes, $numOfPatients);
 }
 
 
@@ -21,15 +21,15 @@ if (isset($_POST['btnInput'])) {
 
     //TO DO : can not create a past appointment (date cant be in the past)
 
-    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])){
-        $paraOutputColour= 'red';
+    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])) {
+        $paraOutputColour = 'red';
         $paraOutput = "Make sure to fill all fields.";
-    }elseif ($tempNumOfPatients <= 0){
+    } elseif ($tempNumOfPatients <= 0) {
         $paraOutputColour = 'red';
         $paraOutput = 'Number of patients must be positive.';
-    }else{
-        RecordUserAppointment($_POST['datetimeInput'],$_POST['detailsInput'], $_POST['numOfPatientsInput']);
-        $paraOutputColour= 'green';
+    } else {
+        RecordUserAppointment($_POST['datetimeInput'], $_POST['detailsInput'], $_POST['numOfPatientsInput']);
+        $paraOutputColour = 'green';
         $paraOutput = "Appointment created";
     }
 }
@@ -60,41 +60,54 @@ if (isset($_POST['btnInput'])) {
 
         <div class="row">
             <div class="col-sm-12">
-                <label for="datetimeInput">Date And Time : </label>
-                <input type="datetime-local" name="datetimeInput">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="datetimeInput">Date And Time : </label>
+                    </div>
+                    <input class="form-control" type="datetime-local" name="datetimeInput">
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label for="numOfPatientsInput">Number of Patients : </label>
-                <input name="numOfPatientsInput" type="number">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="numOfPatientsInput">Number of Patients : </label>
+                    </div>
+                    <input class="form-control" name="numOfPatientsInput" type="number">
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label for="detailsInput">Details : </label>
-                <input name="detailsInput" placeholder="..." type="text">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="detailsInput">Details : </label>
+                    </div>
+                    <input class="form-control" name="detailsInput" placeholder="..." type="text">
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnInput" value="Create" type="submit">
+                <input class="btn btn-success" name="btnInput" value="Create" type="submit">
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-12">
-                <p style="color: <?php echo $paraOutputColour; ?>" > <?php echo $paraOutput; ?> </p>
+                <p style="color: <?php echo $paraOutputColour; ?>"> <?php echo $paraOutput; ?> </p>
             </div>
         </div>
 
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input name="btnBack" value="Back" type="button" onclick="location.href='index.php'">
+                <input class="btn btn-info" name="btnBack" value="Back" type="button"
+                       onclick="location.href='viewAppointmentsPage.php'">
             </div>
         </div>
     </div>
