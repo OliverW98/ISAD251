@@ -7,9 +7,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/src/model/user.php';
 
 // TO DO : view date button resets the select box. this leads to the edit being messed up.
 
-
 session_start();
+echo '<script>console.log("starting session")</script>';
 $user = getUser();
+echo '<script>console.log("1")</script>';
 $appointmentsArray = ($user->getAppointmentsArray());
 $txtAppList = fillTextArea($appointmentsArray);
 $txtAppDetails = $paraOutput = '';
@@ -86,6 +87,7 @@ if (isset($_POST['btnAddNotes'])) {
 <head>
     <meta charset="UTF-8">
     <title>View Appointments</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
