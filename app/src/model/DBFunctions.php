@@ -7,7 +7,6 @@ const DB_DATABASE = "ISAD251_Owilkes";
 
 function getConnection()
 {
-    echo '<script>console.log("in getConnection")</script>';
     $dataSourceName = 'mysql:dbname=' . DB_DATABASE . ';host=' . DB_SERVER;
     $dbConnection = null;
     try {
@@ -21,7 +20,6 @@ function getConnection()
 
 function getUser()
 {
-    echo '<script>console.log("in getUser")</script>';
     $userID = 1; // only 1 user
 
     $appointmentData = getAppointments($userID); // fetches all the appointments for the user
@@ -34,7 +32,6 @@ function getUser()
 
 function createUserObject($userID, $appointmentData, $deadlineData)
 {
-    echo '<script>console.log("in createUserObject")</script>';
     $appointmentsArray = array();
     $deadlinesArray = array();
 
