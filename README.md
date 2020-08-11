@@ -1,5 +1,5 @@
 # ISAD251
-<h1>Soultion images:
+<h1>Soultion images : </h1>
 
 index
 ![index](/images/index.png)
