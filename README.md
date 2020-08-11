@@ -15,7 +15,7 @@ View Deadlines Page
 ![viewDeadlines](/images/viewDeadlines.png)
 Edit Deadlines Page
 ![editDeadlines](/images/editDeadline.png)
-create Deadlines Page
+Create Deadlines Page
 ![createDeadlines](/images/createDeadline.png)
 
 
