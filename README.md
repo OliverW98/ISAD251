@@ -2,21 +2,21 @@
 <h1>Soultion images : </h1>
 
 index
-![index](/images/index.png)
+![index](/images/indexChrome.png)
 View Appointments Page
-![viewAppointments](/images/viewAppointments.png)
+![viewAppointments](/images/viewAppointmentsChrome.png)
 Edit Appointment Page
-![editAppointments](/images/editAppointment.png)
+![editAppointments](/images/editAppointmentChrome.png)
 Add Notes Page
-![addNotes](/images/addNotes.png)
+![addNotes](/images/addNotesChrome.png)
 Create Appointment Page
-![createAppointments](/images/createAppointment.png)
+![createAppointments](/images/createAppointmentChrome.png)
 View Deadlines Page
-![viewDeadlines](/images/viewDeadlines.png)
+![viewDeadlines](/images/viewDeadlinesChrome.png)
 Edit Deadlines Page
-![editDeadlines](/images/editDeadline.png)
+![editDeadlines](/images/editDeadlineChrome.png)
 Create Deadlines Page
-![createDeadlines](/images/createDeadline.png)
+![createDeadlines](/images/createDeadlineChrome.png)
 
 
 Youtube Demo :
