@@ -48,7 +48,7 @@ if (isset($_POST['btnInput'])) {
     <div class="container" style="text-align: center">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Create Appointment</h1>
+                <h1>Create Deadline</h1>
             </div>
         </div>
 
