@@ -2,7 +2,7 @@
 <h1>Soultion images : </h1>
 
 index
-![index](/images/index.png)
+![index](/images/indexChrome.png)
 View Appointments Page
 ![viewAppointments](/images/viewAppointmentsChrome.png)
 Edit Appointment Page
