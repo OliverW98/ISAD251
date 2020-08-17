@@ -22,7 +22,8 @@ function getUser()
 {
     $userID = 1; // only 1 user
 
-    $appointmentData = getAppointments($userID); // fetches all the appointments for the user
+    //fetch all the data from the database
+    $appointmentData = getAppointments($userID);
     $deadlineData = getDeadlines($userID);
 
     $user = createUserObject($userID, $appointmentData, $deadlineData); // creates a user object
@@ -35,7 +36,7 @@ function createUserObject($userID, $appointmentData, $deadlineData)
     $appointmentsArray = array();
     $deadlinesArray = array();
 
-    for ($i = 0; $i < count($appointmentData); $i++) {
+    for ($i = 0; $i < count($appointmentData); $i++) {  //create a array of appointments from the database
         $appointmentID = $appointmentData[$i]['appointmentID'];
         $userID = $appointmentData[$i]['userID'];
         $appointmentDate = $appointmentData[$i]['appointmentDate'];
@@ -48,7 +49,7 @@ function createUserObject($userID, $appointmentData, $deadlineData)
         array_push($appointmentsArray, $appointment);
     }
 
-    for ($i = 0; $i < count($deadlineData); $i++) {
+    for ($i = 0; $i < count($deadlineData); $i++) { //create a array of deadlines from the database
         $deadlineID = $deadlineData[$i]['deadlineID'];
         $deadlineUserID = $deadlineData[$i]['deadlineUserID'];
         $deadlineDate = $deadlineData[$i]['deadlineDate'];
@@ -60,10 +61,10 @@ function createUserObject($userID, $appointmentData, $deadlineData)
         array_push($deadlinesArray, $deadline);
     }
 
-    return $user = new user($userID, $appointmentsArray, $deadlinesArray);
+    return $user = new user($userID, $appointmentsArray, $deadlinesArray); // create a user object with appointments and deadlines
 }
 
-
+//Appointment SQL statements
 function getAppointments($userID)
 {
     $statement = getConnection()->prepare("CALL getAppointments ('" . $userID . "')");
@@ -97,6 +98,7 @@ function addAppointmentNotes($appointmentID, $appointmentNotes)
     $statement->execute();
 }
 
+//deadline SQL statements
 function getDeadlines($userID)
 {
     $statement = getConnection()->prepare("CALL getDeadlines ('" . $userID . "')");

@@ -5,7 +5,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/ISAD251/owilkes/app/src/model/appointment.
 include $_SERVER['DOCUMENT_ROOT'] . '/ISAD251/owilkes/app/src/model/deadline.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/ISAD251/owilkes/app/src/model/user.php';
 
-// TO DO : view date button resets the select box. this leads to the edit being messed up.
 
 session_start();
 $user = getUser();
@@ -14,7 +13,7 @@ $txtDeadlineList = fillTextArea($deadlinesArray);
 $txtDeadlineDetails = $paraOutput = $selectedDeadlineID = '';
 $paraOutputColour = 'black';
 
-function fillTextArea($array)
+function fillTextArea($array) //fills the textarea with all the child's deadlines
 {
     $txt = '';
     for ($i = 0; $i < count($array); $i++) {
@@ -23,7 +22,7 @@ function fillTextArea($array)
     return $txt;
 }
 
-function findDeadlineID($array, $date)
+function findDeadlineID($array, $date) //find the selected deadlineID using the date selected
 {
     for ($i = 0; $i < count($array); $i++) {
         if ($array[$i]->getDeadlineDate() == $date) {
@@ -32,7 +31,7 @@ function findDeadlineID($array, $date)
     }
 }
 
-function findDeadlineDetails($array, $ID)
+function findDeadlineDetails($array, $ID) //fills the textarea with all the details of the selected deadline
 {
     $txt = '';
     for ($i = 0; $i < count($array); $i++) {
@@ -45,7 +44,7 @@ function findDeadlineDetails($array, $ID)
     return $txt;
 }
 
-function findDeadlineMet($array, $ID)
+function findDeadlineMet($array, $ID) // returns if selected deadline is met
 {
     for ($i = 0; $i < count($array); $i++) {
         if ($array[$i]->getDeadlineID() == $ID) {
@@ -72,7 +71,7 @@ if (isset($_POST['btnEditDeadline'])) {
 }
 
 if (isset($_POST['btnDeadlineMet'])) {
-
+    //selected deadline toggles between met and not met when button is pressed
     $selectedDate = $_POST['selectDeadlineDate'];
     $selectedDeadlineID = findDeadlineID($deadlinesArray, $selectedDate);
     if (findDeadlineMet($deadlinesArray, $selectedDeadlineID) == 'false') {

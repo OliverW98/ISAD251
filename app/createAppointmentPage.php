@@ -22,10 +22,11 @@ if (isset($_POST['btnInput'])) {
 
     //TO DO : can not create a past appointment (date cant be in the past)
 
-    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])) {
+    // validation checks for the data entered
+    if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput']) || empty($_POST['numOfPatientsInput'])) { //can not be empty
         $paraOutputColour = 'red';
         $paraOutput = "Make sure to fill all fields.";
-    } elseif ($tempNumOfPatients <= 0) {
+    } elseif ($tempNumOfPatients <= 0) { // patients can be 0 or negative
         $paraOutputColour = 'red';
         $paraOutput = 'Number of patients must be positive.';
     } else {

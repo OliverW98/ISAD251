@@ -13,7 +13,7 @@ $selectedDeadlineID = findDeadlineID($selectedDeadlineDate, $deadlinesArray);
 $datetimeOutput = $detailsOutput = $paraOutput = $deadlineMet = '';
 $paraOutputColour = 'black';
 
-foreach ($deadlinesArray as $deadline) {
+foreach ($deadlinesArray as $deadline) { //fills input with deadline data
     if ($deadline->getDeadlineID() == $selectedDeadlineID) {
         $datetime = new DateTime($deadline->getDeadlineDate());
         $datetimeOutput = "{$datetime->format('Y-m-d')}T{$datetime->format('H:i')}";
@@ -27,7 +27,7 @@ function editUserDeadline($deadlineID, $deadlineDate, $deadlineDetails, $deadlin
     editDeadline($deadlineID, $deadlineDate, $deadlineDetails, $deadlineMet);
 }
 
-function findDeadlineID($date, $array)
+function findDeadlineID($date, $array) //find the selected deadlineID using the date selected
 {
     for ($i = 0; $i < count($array); $i++) {
         if ($array[$i]->getDeadlineDate() == $date) {

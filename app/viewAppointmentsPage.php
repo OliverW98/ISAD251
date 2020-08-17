@@ -5,7 +5,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/ISAD251/owilkes/app/src/model/appointment.
 include $_SERVER['DOCUMENT_ROOT'] . '/ISAD251/owilkes/app/src/model/deadline.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/ISAD251/owilkes/app/src/model/user.php';
 
-// TO DO : view date button resets the select box. this leads to the edit being messed up.
 
 session_start();
 $user = getUser();
@@ -14,7 +13,7 @@ $txtAppList = fillTextArea($appointmentsArray);
 $txtAppDetails = $paraOutput = '';
 $paraOutputColour = 'black';
 
-function fillTextArea($array)
+function fillTextArea($array) //fills the textarea with all the parents appointments
 {
     $txt = '';
     for ($i = 0; $i < count($array); $i++) {
@@ -23,7 +22,7 @@ function fillTextArea($array)
     return $txt;
 }
 
-function findAppointmentDetails($array, $date)
+function findAppointmentDetails($array, $date) //fills the textarea with all the details of the selected appointment
 {
     $txt = '';
     for ($i = 0; $i < count($array); $i++) {
@@ -37,7 +36,7 @@ function findAppointmentDetails($array, $date)
     return $txt;
 }
 
-function findAppointmentID($array, $date)
+function findAppointmentID($array, $date) //find the selected appointmentID using the date selected
 {
     for ($i = 0; $i < count($array); $i++) {
         if ($array[$i]->getAppointmentDate() == $date) {
@@ -71,7 +70,7 @@ if (isset($_POST['btnEditAppointment'])) {
 if (isset($_POST['btnAddNotes'])) {
     $appdate = new DateTime($_POST['selectAppointmentDate']);
     $today = new DateTime(date("Y-m-d H:i:s", time()));
-    if ($appdate < $today) {
+    if ($appdate < $today) {  // compares the date of the appointment and todays date
         $_SESSION['selectedAppointmentDate'] = $_POST['selectAppointmentDate'];
         header("Location: addAppointmentNotes.php");
     } else {
@@ -119,7 +118,7 @@ if (isset($_POST['btnAddNotes'])) {
             <div class="col-lg-4">
                 <div class="row">
                     <select class="custom-select" name="selectAppointmentDate">
-                        <?php foreach ($appointmentsArray as $item) { ?>
+                        <?php foreach ($appointmentsArray as $item) { //fills the selected box with appointment datea ?>
                             <option name="option"><?php echo $item->getAppointmentDate() ?></option>
                         <?php } ?>
                     </select>

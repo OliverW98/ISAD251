@@ -14,9 +14,8 @@ $numOfPatientsOutput = $detailsOutput = $paraOutput = $notesOutput = '';
 $paraOutputColour = 'black';
 $pastAppointment = pastAppointment($selectedAppointmentDate);
 
-//TO DO : Date maybe?
 
-function pastAppointment($selectedAppointmentDate)
+function pastAppointment($selectedAppointmentDate) // checks appointmentDate and today and returns a bool to disable notes input
 {
     $appdate = new DateTime($selectedAppointmentDate);
     $today = new DateTime(date("Y-m-d H:i:s", time()));
@@ -27,7 +26,7 @@ function pastAppointment($selectedAppointmentDate)
     }
 }
 
-foreach ($appointmentsArray as $app) {
+foreach ($appointmentsArray as $app) { //fills input boxes with appointment data
     if ($app->getAppointmentID() == $selectedAppointmentID) {
         $numOfPatientsOutput = (int)$app->getNumOfPatients();
         $detailsOutput = $app->getAppointmentDetails();
@@ -46,7 +45,7 @@ function editUserAppointmentNoNotes($ID, $datetime, $details, $numOfPatients)
     editAppointment($ID, $datetime, $details, $notes, $numOfPatients);
 }
 
-function findAppointmentID($date, $array)
+function findAppointmentID($date, $array) //find the selected appointmentID using the date selected
 {
     for ($i = 0; $i < count($array); $i++) {
         if ($array[$i]->getAppointmentDate() == $date) {

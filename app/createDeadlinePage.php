@@ -16,7 +16,7 @@ function RecordUserDeadline($datetime, $details)
 }
 
 if (isset($_POST['btnInput'])) {
-
+    // data validation
     if (empty($_POST['datetimeInput']) || empty($_POST['detailsInput'])) {
         $paraOutputColour = 'red';
         $paraOutput = "Make sure to fill all fields.";

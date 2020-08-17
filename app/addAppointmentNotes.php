@@ -18,7 +18,7 @@ function addUserNotes($ID, $notes)
     addAppointmentNotes($ID, $notes);
 }
 
-function findAppointmentID($date, $array)
+function findAppointmentID($date, $array) //find the selected appointmentID using the date selected
 {
     for ($i = 0; $i < count($array); $i++) {
         if ($array[$i]->getAppointmentDate() == $date) {
@@ -27,9 +27,9 @@ function findAppointmentID($date, $array)
     }
 }
 
-foreach ($appointmentsArray as $app) {
+foreach ($appointmentsArray as $app) { // checks if the appointment already has notes
     if ($app->getAppointmentID() == $selectedAppointmentID && $app->getAppointmentNotes() != '') {
-        $hasNotes = true;
+        $hasNotes = true; // this variable is checked in the HTML and disables inputs
         $paraOutputColour = 'red';
         $paraOutput = "Appointment already has notes. Please go to the Edit page.";
     }
