@@ -5,6 +5,10 @@ This is a full stack application which allows parents and children to manage the
 Parents are able to see past and future appointments listed when visiting the view appointments page. From there they are able to select an appointment from the drop-down bar and then view that appointment in more detail, edit that appointment (change the number of patients going , the appointment details or the appointment notes), add notes to a past appointment or cancel the selected appointment. Furthermore, the parent is able to create appointments from this page.
 Children are able to see past and future deadlines listed when visiting the view deadlines page. From there they are able to select a deadline from the drop-down bar and then view that deadline in more detail, edit that deadline (change the deadline details or the deadline date) or toggle if the deadline is met or not. Furthermore, the parent is able to create appointments from this page.
 
+Youtube Demo :
+
+https://www.youtube.com/watch?v=wvRO0NKPjvw
+
 <h1>Solution images : </h1>
 
 index
@@ -23,11 +27,6 @@ Edit Deadlines Page
 ![editDeadlines](/images/editDeadlineChrome.png)
 Create Deadlines Page
 ![createDeadlines](/images/createDeadlineChrome.png)
-
-
-Youtube Demo :
-
-https://www.youtube.com/watch?v=wvRO0NKPjvw
 
 Credit :
 
